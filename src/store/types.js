@@ -1,0 +1,12 @@
+export const LOAD_TASKS = "LOAD_TASKS";
+export const SET_TASKS = "SET_TASKS";
+export const EDIT_TASK = "EDIT_TASK";
+export const SET_FILTER = "SET_FILTER";
+export const CREATE_TASK = "CREATE_TASK";
+export const TASK_CREATION_ERROR = "TASK_CREATION_ERROR";
+export const AUTH_USER = "AUTH_USER";
+export const SET_USER = "SET_USER";
+export const LOGOUT_USER = "LOGOUT_USER";
+export const SET_ERROR = "SET_ERROR";
+export const REMOVE_ERROR = "REMOVE_ERROR";
+export const PROCESS_CREATE_TASK = "PROCESS_CREATE_TASK";
