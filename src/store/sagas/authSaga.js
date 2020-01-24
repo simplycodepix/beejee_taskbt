@@ -1,7 +1,8 @@
 import { takeEvery, put } from 'redux-saga/effects';
-import { AUTH_USER, LOGOUT_USER } from '../types';
+import { AUTH_USER, LOGOUT_USER, AUTH_USER_FAILED } from '../types';
 import axios from 'axios';
 import { setUser } from '../actions/authActions';
+import { setError } from '../actions/errorActions';
 
 export function* authSaga(authData) {
     try {
@@ -16,7 +17,13 @@ export function* authSaga(authData) {
 
         if (data.status === 'error') {
             localStorage.removeItem('token');
-            yield put(setUser(false, data.message));
+            
+            yield put(setUser(false));
+            yield put(setError({
+                type: AUTH_USER_FAILED,
+                error: data.message
+            }))
+
             return;
         }
 

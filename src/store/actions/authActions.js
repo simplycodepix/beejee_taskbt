@@ -1,14 +1,13 @@
-import { AUTH_USER, SET_USER, LOGOUT_USER, SET_ERROR, REMOVE_ERROR } from "../types";
+import { AUTH_USER, SET_USER, LOGOUT_USER } from "../types";
 
 export const authUser = (payload) => ({
     type: AUTH_USER,
     ...payload
 });
 
-export const setUser = (authenticated, errors = {}) => ({
+export const setUser = (authenticated) => ({
     type: SET_USER,
-    authenticated,
-    errors
+    authenticated
 });
 
 export const logoutUser = () => ({

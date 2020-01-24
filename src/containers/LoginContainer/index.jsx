@@ -6,10 +6,14 @@ import { authUser } from '../../store/actions/authActions';
 import { Redirect } from 'react-router';
 
 import './index.css';
+import { selectErrorText } from '../../store/selectors/error/errorSelector';
+import { AUTH_USER_FAILED } from '../../store/types';
+import { removeErrors } from '../../store/actions/errorActions';
 
-const LoginContainer = ({ authenticated, requestAuthUser, formErrors }) => {
+const LoginContainer = ({ authenticated, requestAuthUser, requestErrorMessage }) => {
     const initialFormData = { username: '', password: '' };
     const [formData, setFormData] = useState(initialFormData);
+    const formErrors = requestErrorMessage(AUTH_USER_FAILED);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -48,11 +52,12 @@ const LoginContainer = ({ authenticated, requestAuthUser, formErrors }) => {
 
 const mapStateToProps = (state) => ({
     authenticated: state.session.authenticated,
-    formErrors: state.session.errors
+    requestErrorMessage: (type) => selectErrorText(state, type)
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    requestAuthUser: (data) => dispatch(authUser(data))
+    requestAuthUser: (data) => dispatch(authUser(data)),
+    removeErrors: () => dispatch(removeErrors())
 });
 
 const ConnectedLoginContainer = connect(mapStateToProps, mapDispatchToProps)(LoginContainer)

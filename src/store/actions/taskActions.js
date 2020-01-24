@@ -15,11 +15,6 @@ export const createTask = (payload) => ({
     ...payload
 });
 
-export const setTaskCreationError = (errors) => ({
-    type: types.TASK_CREATION_ERROR,
-    errors
-});
-
 export const editTask = (task) => ({
     type: types.EDIT_TASK,
     task
@@ -34,9 +29,8 @@ export const processCreateTask = (message, errors = {}) => ({
 export const setFilters = (filters) => ({
     type: types.SET_FILTER,
     filters
-})
+});
 
-export const setErrors = (errors = {}) => ({
-    type: types.SET_ERROR,
-    errors
+export const clearMessages = () => ({
+    type: types.CLEAR_MESSAGES
 });

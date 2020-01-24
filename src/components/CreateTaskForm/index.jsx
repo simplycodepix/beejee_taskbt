@@ -1,16 +1,29 @@
 import React, { useState } from 'react';
 import Button from '../Button';
 import Form from '../Form';
+import { CREATE_TASK_FAILED } from '../../store/types';
 
 import './index.css';
 
-const CreateTaskForm = ({ createTask, errors, success }) => {
+const CreateTaskForm = ({ 
+    createTask, 
+    clearMessages, 
+    removeErrors, 
+    requestErrorMessage, 
+    success 
+}) => {
     const initialFormData = { username: '', email: '', text: '' };
     const [formData, setFormData] = useState(initialFormData);
+    const errors = requestErrorMessage(CREATE_TASK_FAILED);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
+
+        if (Object.keys(errors).length > 0 || success) {
+            clearMessages();
+            removeErrors();
+        }
     };
 
     const handleSubmit = async (e) => {

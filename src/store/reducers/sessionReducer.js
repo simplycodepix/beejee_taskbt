@@ -1,9 +1,8 @@
-import { SET_USER, SET_ERROR, REMOVE_ERROR } from "../types";
+import { SET_USER } from "../types";
 
 const defaultState = {
     session: {
-        authenticated: false,
-        errors: {}
+        authenticated: false
     }
 }
 
@@ -12,7 +11,7 @@ export default function session(state = defaultState.session, action) {
 
     switch (type) {
         case SET_USER:
-            return { ...state, authenticated: action.authenticated, errors: action.errors }
+            return { ...state, authenticated: action.authenticated }
         default:
             return state;
     }

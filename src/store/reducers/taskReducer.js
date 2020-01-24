@@ -1,9 +1,8 @@
-import { SET_TASKS, SET_FILTER, SET_ERROR, CREATE_TASK, PROCESS_CREATE_TASK } from "../types";
+import { SET_TASKS, SET_FILTER, SET_ERROR, PROCESS_CREATE_TASK, CLEAR_MESSAGES } from "../types";
 
 const defaultState = {
     tasks: {
         data: [],
-        errors: {},
         task_count: 0,
         filter: {
             page: 0,
@@ -25,6 +24,8 @@ export default function tasks(state = defaultState.tasks, action) {
             return { ...state, errors: action.errors }
         case PROCESS_CREATE_TASK:
             return { ...state, messageSuccess: action.message };
+        case CLEAR_MESSAGES:
+            return { ...state, messageSuccess: '' };
         default:
             return state;
     }

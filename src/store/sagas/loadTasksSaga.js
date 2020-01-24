@@ -11,11 +11,12 @@ export function* loadTasksSaga() {
         const filters = yield select(getFilterInfo);
 
         const { data } = yield axios.get(`${process.env.REACT_APP_API_URL}?developer=Godunov`, { params: filters });
-        const { tasks, total_task_count } = data.message;
+        let { tasks, total_task_count } = data.message;
 
         yield (put(setTasks(tasks, total_task_count)));
     } catch (error) {
         console.log(error);
+        loadTasksSaga();
     }
 }
 
